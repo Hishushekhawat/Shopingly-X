@@ -1,0 +1,30 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}View product{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+  <h3 class="fw-bold text-center">Your Products</h3>
+  <hr>
+     <div class="row">
+  	 {% for i in product %}
+ 
+		 <div class="card" style="width: 18rem;">
+			 <img src="{{ i.product_image.url }}" class="card-img-top" alt="..." height="300px" width="500px">
+			 <div class="card-body">
+			    <p class="card-text">{{ i.title }}</p>
+			    <p class="card-text">{{ i.brand }}</p>
+			    <p class="card-text">Rs. {{ i.discount_prize }} <small class="fw-light text-decoration-line-through">Rs. {{ i.selling_prize }}</small></p>
+			    <p class="card-text"></p>
+			    <a href="{% url 'updatedata' i.id %}" class="btn btn-primary">Update</a>
+			    <a href="{% url 'delete' i.id %}" class="btn btn-danger">Remove</a>
+		     </div>
+	      </div>
+  
+      <br>
+  	 <br>
+      {% endfor %}
+     </div>
+  </div>	
+</div>
+
+{% endblock main-content %}

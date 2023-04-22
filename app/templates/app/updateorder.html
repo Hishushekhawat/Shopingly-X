@@ -1,0 +1,37 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Update Order{% endblock title %}
+{% block main-content %}
+<div class="container my-3">
+ <div class="row">
+	  <div class="col-sm-6 border-end">
+		  
+		   
+		   <h3>Update Status</h3>
+		   <hr>
+		   <form action="" method="post" novalidate class="shadow p-5">
+			    {% csrf_token %}
+			    {% if messages %}
+		      		{% for message in messages %}
+		        	<p {% if message.tags %} class="alert alert-{{message.tags}} mb-5" {% endif %}>{{message}}</p>
+		      		{% endfor %}
+	    		{% endif %}
+			    {% for fm in form %}
+			    <div class="form-group">
+			      {{fm.label_tag}} {{fm}} <small class="text-danger">{{fm.errors|striptags}}</small><br>
+			    </div>
+			    {% endfor %}
+			    {% if form.non_field_errors %}
+			      {% for error in form.non_field_errors %}
+			        <p class="alert alert-danger my-3">{{error}}</p>
+			      {% endfor %}
+			      {% endif %}
+			    <br>
+			    <input type="submit" class="btn btn-danger mt-4" value="submit">
+		   </form>  
+		   <hr>
+		   <a href="{% url 'allorders' %}" class=" btn btn-primary">Go to Orders</a> 
+	  </div>
+	</div>
+</div>
+{% endblock main-content %}

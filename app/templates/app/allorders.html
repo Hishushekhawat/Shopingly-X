@@ -1,0 +1,32 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}View Orders{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+  <h3 class="fw-bold text-center">Your Orders</h3>
+  <hr>
+     <div class="row">
+  	 {% for i in orders %}
+ 
+		 <div class="card" style="width: 18rem;">
+			 <img src="{{ i.product.product_image.url }}" class="card-img-top" alt="..." height="300px" width="500px">
+			 <div class="card-body">
+			    <p class="card-text">{{ i.customer.name }}</p>
+			    <p class="card-text">{{ i.customer.locality }},{{i.customer.city}},{{i.customer.state}}</p>
+			    <p class="card-text">Name: {{i.product.title}}</p>
+			    <p class="card-text">Prize: Rs. {{ i.total_prize }} </p>
+			    <p class="card-text">Quantity: {{i.quantity}}</p>
+			    <p class="card-text">Status: {{i.status}}</p>
+			    <a href="{% url 'orderupdate' i.id %}" class="btn btn-primary">Update</a>
+			    <a href="{% url 'removeorder' i.id %}" class="btn btn-danger">Remove</a>
+		     </div>
+	      </div>
+  
+      <br>
+  	 <br>
+      {% endfor %}
+     </div>
+  </div>	
+</div>
+
+{% endblock main-content %}
